@@ -317,3 +317,20 @@ main {
     background-color: var(--color-accent);
     color: var(--color-text-inverse);
 }
+
+/* ── Service Projects ── */
+
+.project-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-md);
+}
+
+.project-item img {
+    height: 40px;
+}
+
+.project-date {
+    font-weight: 700;
+}
