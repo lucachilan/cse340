@@ -57,3 +57,72 @@ VALUES
 (3, 'Back-to-School Supply Drive', 'Collecting and distributing school supplies to students from families in need before the school year.', '500 Civic Center Dr, Lakewood', '2026-08-25'),
 (3, 'Holiday Meal Prep', 'Preparing and delivering holiday meals to over 300 families across Lakewood during the winter season.', '22 Warmth Way, Lakewood', '2026-12-18'),
 (3, 'Neighborhood Cleanup Day', 'Mobilizing volunteers to clean up litter, paint public benches, and beautify local parks.', '10 Lakeshore Blvd, Lakewood', '2026-10-05');
+
+-- 
+-- CATEGORY TABLE
+--
+
+CREATE TABLE category (
+    category_id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL UNIQUE
+);
+
+-- 
+-- SERVICE PROJECT CATEGORY (junction table)
+-- Implements the many-to-many relationship between service_project and category.
+--
+
+CREATE TABLE service_project_category (
+    project_id INT NOT NULL REFERENCES service_project(project_id),
+    category_id INT NOT NULL REFERENCES category(category_id),
+    PRIMARY KEY (project_id, category_id)
+);
+
+-- 
+-- Insert sample data: Categories
+-- 
+INSERT INTO category (name)
+VALUES
+('Construction & Infrastructure'),
+('Environment & Sustainability'),
+('Education & Youth'),
+('Food & Nutrition'),
+('Community Outreach');
+
+-- 
+-- Insert sample data: Project-Category Associations
+-- (project_id references the auto-generated IDs 1-15 from the service_project inserts above)
+-- 
+
+INSERT INTO service_project_category (project_id, category_id)
+VALUES
+-- BrightFuture Builders projects
+(1, 1),   -- Community Center Renovation → Construction & Infrastructure
+(2, 1),   -- Affordable Housing Build → Construction & Infrastructure
+(3, 1),   -- School Playground Rebuild → Construction & Infrastructure
+(3, 3),   -- School Playground Rebuild → Education & Youth
+(4, 1),   -- Bridge Repair Project → Construction & Infrastructure
+(5, 2),   -- Solar Panel Installation Drive → Environment & Sustainability
+(5, 1),   -- Solar Panel Installation Drive → Construction & Infrastructure
+
+-- GreenHarvest Growers projects
+(6, 2),   -- Neighborhood Garden Initiative → Environment & Sustainability
+(6, 4),   -- Neighborhood Garden Initiative → Food & Nutrition
+(7, 4),   -- Farm-to-Table Workshop → Food & Nutrition
+(7, 3),   -- Farm-to-Table Workshop → Education & Youth
+(8, 2),   -- Community Composting Program → Environment & Sustainability
+(9, 3),   -- Youth Agriculture Camp → Education & Youth
+(9, 2),   -- Youth Agriculture Camp → Environment & Sustainability
+(10, 2),  -- Fruit Tree Planting Day → Environment & Sustainability
+(10, 4),  -- Fruit Tree Planting Day → Food & Nutrition
+
+-- UnityServe Volunteers projects
+(11, 4),  -- Summer Food Drive → Food & Nutrition
+(11, 5),  -- Summer Food Drive → Community Outreach
+(12, 5),  -- Senior Companion Program → Community Outreach
+(13, 3),  -- Back-to-School Supply Drive → Education & Youth
+(13, 5),  -- Back-to-School Supply Drive → Community Outreach
+(14, 4),  -- Holiday Meal Prep → Food & Nutrition
+(14, 5),  -- Holiday Meal Prep → Community Outreach
+(15, 2),  -- Neighborhood Cleanup Day → Environment & Sustainability
+(15, 5);  -- Neighborhood Cleanup Day → Community Outreach
