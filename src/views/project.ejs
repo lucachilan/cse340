@@ -24,6 +24,15 @@
                         <%= project.organization_name %>
                     </a>
                 </p>
+                <% if (categories && categories.length > 0) { %>
+                    <p class="project-tags-info">
+                        <strong>Categories:</strong>
+                        <% categories.forEach((category, index) => { %>
+                            <a href="/category/<%= category.category_id %>" class="category-tag-link">
+                                <%= category.name %></a><%= index < categories.length - 1 ? ',' : '' %>
+                        <% }) %>
+                    </p>
+                <% } %>
                 <% if (project.logo_filename) { %>
                     <div class="org-logo-container">
                         <img src="/images/<%= project.logo_filename %>" alt="<%= project.organization_name %> logo" class="org-logo">
