@@ -4,10 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Service Network built for CSE 340, the <%= title %> page">
+    <meta name="author" content="Luca Chilan">
     <title>
         <%= title %>
     </title>
-    <meta name="description" content="Service Network built for CSE 340, the <%= title %> page">
     <link rel="stylesheet" href="/css/main.css">
 </head>
 
@@ -20,3 +21,19 @@
             <li><a href="/categories">Categories</a></li>
         </ul>
     </nav>
+    <%
+        const messages = flash();
+        const hasMessages = Object.values(messages).some(arr => arr.length > 0);
+    %>
+    <% if (hasMessages) { %>
+    <div id="flash-messages">
+        <% Object.keys(messages).forEach(type => { %>
+            <% messages[type].forEach(msg => { %>
+                <div class="alert <%= type %>">
+                    <%= msg %>
+                    <button class="alert-close" onclick="this.parentElement.remove()" aria-label="Dismiss">&times;</button>
+                </div>
+            <% }); %>
+        <% }); %>
+    </div>
+    <% } %>

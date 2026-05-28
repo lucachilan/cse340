@@ -1,18 +1,20 @@
 <%- include('partials/header') %>
     <main>
-        <h1>
-            <%= title %>
-        </h1>
+        <div class="page-header">
+            <h1>
+                <%= title %>
+            </h1>
+            <a href="/new-organization" class="btn-primary">+ Add Organization</a>
+        </div>
 
         <p>Here are a few of our partner organizations:</p>
         <ul>
             <% organizations.forEach(organization=> { %>
                 <li>
-                    <img src="/images/<%= organization.logo_filename %>" alt="<%= organization.name %> logo">
-                    <a href="/organization/<%= organization.organization_id %>">
-                        <%= organization.name %>
-                    </a>
-                    :<%= organization.contact_email %>
+                    <img src="/images/<%=organization.logo_filename%>" alt="<%=organization.name%> logo">
+                    <a href="/organization/<%=organization.organization_id%>">
+                        <%=organization.name%>
+                    </a>: <%=organization.contact_email%>
                 </li>
                 <% }); %>
         </ul>
