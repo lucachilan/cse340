@@ -1,8 +1,11 @@
 <%- include('partials/header') %>
     <main>
-        <h1>
-            <%= title %>
-        </h1>
+        <div class="page-header">
+            <h1>
+                <%= title %>
+            </h1>
+            <a href="/new-project" class="btn-primary">+ Add Service Project</a>
+        </div>
         <h2>Upcoming Service Projects</h2>
         <ul>
             <% projects.forEach(project=> { %>

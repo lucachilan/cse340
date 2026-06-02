@@ -1,56 +1,72 @@
 <%- include('partials/header') %>
     <main>
-        <h1><%= title %></h1>
+        <h1>
+            <%= title %>
+        </h1>
 
         <div class="org-detail-header">
             <div class="org-logo-wrap">
-                <img src="/images/<%= organizationDetails.logo_filename %>" alt="<%= organizationDetails.name %> logo" class="org-logo">
+                <img src="/images/<%= organizationDetails.logo_filename %>" alt="<%= organizationDetails.name %> logo"
+                    class="org-logo">
             </div>
             <div class="org-info">
-                <h2><%= organizationDetails.name %></h2>
-                <p><%= organizationDetails.description %></p>
-                <% if (organizationDetails.contact_email) { %>
-                <p class="org-email">
-                    <span class="org-email-label">Contact:</span>
-                    <a href="mailto:<%= organizationDetails.contact_email %>"><%= organizationDetails.contact_email %></a>
+                <h2>
+                    <%= organizationDetails.name %>
+                </h2>
+                <p>
+                    <%= organizationDetails.description %>
                 </p>
-                <% } %>
+                <% if (organizationDetails.contact_email) { %>
+                    <p class="org-email">
+                        <span class="org-email-label">Contact:</span>
+                        <a href="mailto:<%= organizationDetails.contact_email %>">
+                            <%= organizationDetails.contact_email %>
+                        </a>
+                    </p>
+
+                    <% } %>
             </div>
+            <p><a href="/edit-organization/<%= organizationDetails.organization_id %>">Edit Organization</a></p>
         </div>
 
         <h3 class="section-heading">Service Projects</h3>
 
-        <% if (projects.length === 0) { %>
-        <div class="empty-state">
-            <div class="empty-state-icon">📋</div>
-            <h4>No projects yet</h4>
-            <p>This organization doesn't have any service projects listed yet. Check back soon!</p>
-        </div>
-        <% } else { %>
-        <ul class="project-list">
-            <% projects.forEach(project => { %>
-            <li class="project-card">
-                <h4><a href="/project/<%= project.project_id %>"><%= project.title %></a></h4>
-                <p><%= project.description %></p>
-                <div class="project-meta">
-                    <span class="project-meta-item">📍 <%= project.location %></span>
-                    <span class="project-meta-item">📅 <%= project.date.toLocaleDateString() %></span>
-                </div>
-            </li>
-            <% }); %>
-        </ul>
-        <% } %>
+        <% if (projects.length===0) { %>
+            <div class="empty-state">
+                <div class="empty-state-icon">📋</div>
+                <h4>No projects yet</h4>
+                <p>This organization doesn't have any service projects listed yet. Check back soon!</p>
+            </div>
+            <% } else { %>
+                <ul class="project-list">
+                    <% projects.forEach(project=> { %>
+                        <li class="project-card">
+                            <h4><a href="/project/<%= project.project_id %>">
+                                    <%= project.title %>
+                                </a></h4>
+                            <p>
+                                <%= project.description %>
+                            </p>
+                            <div class="project-meta">
+                                <span class="project-meta-item">📍 <%= project.location %></span>
+                                <span class="project-meta-item">📅 <%= project.date.toLocaleDateString() %></span>
+                            </div>
+                        </li>
+                        <% }); %>
+                </ul>
 
-        <% if (isDev) { %>
-        <div class="danger-zone">
-            <h4 class="danger-zone-title">⚠️ Developer Tools</h4>
-            <p>This section is only visible in development mode.</p>
-            <form action="/organization/<%= organizationDetails.organization_id %>/delete" method="POST"
-                  onsubmit="return confirm('Permanently delete \'<%= organizationDetails.name %>\'? This cannot be undone.')">
-                <button type="submit" class="btn-danger">🗑 Delete This Organization</button>
-            </form>
-        </div>
-        <% } %>
+                <% } %>
+
+                    <% if (isDev) { %>
+                        <div class="danger-zone">
+                            <h4 class="danger-zone-title">⚠️ Developer Tools</h4>
+                            <p>This section is only visible in development mode.</p>
+                            <form action="/organization/<%= organizationDetails.organization_id %>/delete" method="POST"
+                                onsubmit="return confirm('Permanently delete \'<%= organizationDetails.name %>\'? This cannot be undone.')">
+                                <button type="submit" class="btn-danger">🗑 Delete This Organization</button>
+                            </form>
+                        </div>
+                        <% } %>
 
     </main>
-    <%- include('partials/footer') %>
+    <%- include('partials/footer') %>
