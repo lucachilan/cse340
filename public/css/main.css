@@ -404,8 +404,15 @@ main {
 }
 
 @keyframes slideDown {
-    from { opacity: 0; transform: translateY(-8px); }
-    to   { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .alert-close {
@@ -867,4 +874,85 @@ main {
     font-weight: 500;
     cursor: pointer;
     user-select: none;
+}
+
+/* ----- Form Pages ----- */
+.form-page {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 1rem;
+}
+
+/* Card container for the form */
+.form-card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(8px);
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+/* Form groups */
+.form-group {
+    margin-bottom: 1.2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Labels */
+.form-group label {
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+    color: #222;
+}
+
+/* Inputs */
+.form-group input[type="text"],
+.form-group textarea,
+.form-group select {
+    padding: 0.6rem 0.8rem;
+    border: 2px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color .2s, box-shadow .2s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: #0066ff;
+    box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.15);
+    outline: none;
+}
+
+/* Error styling */
+.input-error {
+    border-color: #e01b24 !important;
+    background-color: rgba(224, 27, 36, 0.05);
+}
+
+.error-list {
+    margin-bottom: 1rem;
+    padding-left: 1.2rem;
+}
+
+.error-message {
+    color: #e01b24;
+    font-size: 0.95rem;
+}
+
+/* Primary button */
+.btn-primary {
+    background: #0066ff;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 0.6rem 1.2rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background .2s;
+}
+
+.btn-primary:hover {
+    background: #0052cc;
 }

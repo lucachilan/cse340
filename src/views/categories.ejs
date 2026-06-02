@@ -1,9 +1,11 @@
 <%- include('partials/header') %>
     <main>
-        <h1>
-            <%= title %>
-        </h1>
-        <h2>Service Categories</h2>
+        <div class="page-header">
+            <h1>
+                <%= title %>
+            </h1>
+            <a href="/new-category" class="btn-primary">+ Add Category</a>
+        </div>
         <ul>
             <% categories.forEach(category=> { %>
                 <li class="category-item">

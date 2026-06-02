@@ -1,0 +1,25 @@
+<%- include('partials/header') %>
+    <main class="form-page">
+        <h1>Create Category</h1>
+
+        <% if (errors && errors.length) { %>
+            <ul class="error-list">
+                <% errors.forEach(err=> { %>
+                    <li class="error-message">
+                        <%= err.msg %>
+                    </li>
+                    <% }) %>
+            </ul>
+            <% } %>
+
+                <form action="/new-category" method="POST" class="form-card">
+                    <div class="form-group">
+                        <label for="name">Category Name</label>
+                        <input type="text" id="name" name="name" value="<%= typeof name !== 'undefined' ? name : '' %>"
+                            required class="<%= errors && errors.some(e => e.param === 'name') ? 'input-error' : '' %>"
+                            placeholder="Enter category name">
+                    </div>
+                    <button type="submit" class="btn-primary">Create</button>
+                </form>
+    </main>
+    <%- include('partials/footer') %>

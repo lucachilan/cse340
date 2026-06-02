@@ -6,6 +6,8 @@
 
         <section class="projects-section">
             <h2>Service Projects in this Category</h2>
+            <a class="btn-secondary " href="/edit-category/<%= category.category_id %>">Edit
+                Category</a>
             <% if (projects && projects.length> 0) { %>
                 <ul class="projects-list">
                     <% projects.forEach(project=> { %>
