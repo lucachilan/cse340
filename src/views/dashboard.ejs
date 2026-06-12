@@ -1,0 +1,47 @@
+<%- include('partials/header') %>
+    <main>
+        <div class="page-header" style="margin-bottom: var(--space-xl);">
+            <h1>
+                <%= title %>
+            </h1>
+        </div>
+
+        <h2 class="section-heading" style="margin-top: 0;">My Volunteered Projects</h2>
+
+        <% if (volunteeredProjects.length === 0) { %>
+            <div class="empty-state">
+                <div class="empty-state-icon">🤝</div>
+                <h4>No volunteered projects yet</h4>
+                <p>You haven't signed up to volunteer for any service projects. Start making a difference today!</p>
+                <div style="margin-top: var(--space-lg);">
+                    <a href="/projects" class="btn-primary">Browse Projects</a>
+                </div>
+            </div>
+        <% } else { %>
+            <ul>
+                <% volunteeredProjects.forEach(project => { %>
+                    <li class="project-item">
+                        <span>
+                            <strong class="project-date">
+                                <%= new Date(project.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) %>
+                            </strong>:
+                            <a href="/project/<%= project.project_id %>" style="font-weight: 600;">
+                                <%= project.title %>
+                            </a>
+                        </span>
+                        <span style="display: inline-flex; align-items: center; gap: var(--space-md);">
+                            <i>
+                                <a href="/organization/<%= project.organization_id %>">
+                                    <%= project.organization_name %>
+                                </a>
+                            </i>
+                            <% if (project.logo_filename) { %>
+                                <img src="/images/<%= project.logo_filename %>" alt="<%= project.organization_name %> logo" style="height: 32px; width: 32px; object-fit: contain;">
+                            <% } %>
+                        </span>
+                    </li>
+                <% }) %>
+            </ul>
+        <% } %>
+    </main>
+<%- include('partials/footer') %>

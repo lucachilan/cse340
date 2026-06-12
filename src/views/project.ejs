@@ -40,7 +40,28 @@
                 <% } %>
             </div>
 
-            <% if (user && user.role_name === 'admin') { %>
+            <% if (locals.user) { %>
+                <div class="volunteer-section" style="margin-top: var(--space-lg); padding-top: var(--space-md); border-top: 1px solid var(--color-border);">
+                    <% if (locals.isVolunteering) { %>
+                        <div class="volunteer-status" style="display: flex; align-items: center; justify-content: space-between; gap: var(--space-md); background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); padding: var(--space-md); border-radius: var(--radius-md);">
+                            <span style="color: #10b981; display: flex; align-items: center; gap: 8px; font-weight: 500;">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                                You are volunteering for this project
+                            </span>
+                            <a href="/project/<%= project.project_id %>/unvolunteer" class="btn-danger" style="text-decoration: none;">Remove myself</a>
+                        </div>
+                    <% } else { %>
+                        <div style="display: flex; justify-content: center; margin-top: var(--space-md);">
+                            <a href="/project/<%= project.project_id %>/volunteer" class="btn-primary" style="display: inline-flex; align-items: center; gap: 8px; text-decoration: none;">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                                Volunteer for this Project
+                            </a>
+                        </div>
+                    <% } %>
+                </div>
+            <% } %>
+
+            <% if (locals.user && locals.user.role_name === 'admin') { %>
             <div class="project-actions" style="margin-top: var(--space-lg); padding-top: var(--space-md); border-top: 1px solid var(--color-border);">
                 <a href="/assign-categories/<%= project.project_id %>" class="btn-secondary">Edit Categories</a>
             </div>

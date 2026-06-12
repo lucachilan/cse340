@@ -9,7 +9,7 @@ import {
     showEditOrganizationForm,
     processEditOrganizationForm
 } from './controllers/organizations.js';
-import { showHomePage } from './controllers/index.js';
+import { showHomePage, showDashboard } from './controllers/index.js';
 import {
     showProjectsPage,
     showProjectDetailsPage,
@@ -34,8 +34,11 @@ import {
     showLoginForm,
     processLoginForm,
     processLogout,
-    requireRole
+    requireRole,
+    requireLogin,
+    showUsersListPage
 } from './controllers/users.js';
+import { volunteerForProject, unvolunteerForProject } from './controllers/volunteers.js';
 import { testErrorPage } from './controllers/errors.js';
 
 const router = express.Router();
@@ -95,6 +98,14 @@ router.get('/test-error', testErrorPage);
 router.get('/login', showLoginForm);
 router.post('/login', processLoginForm);
 router.get('/logout', processLogout);
+
+// Volunteer routes
+router.get('/dashboard', requireLogin, showDashboard);
+router.get('/project/:project_id/volunteer', requireLogin, volunteerForProject);
+router.get('/project/:project_id/unvolunteer', requireLogin, unvolunteerForProject);
+
+// Users list - admin only
+router.get('/users', requireRole('admin'), showUsersListPage);
 
 
 export default router;

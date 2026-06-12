@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt';
-import { createUser, authenticateUser } from '../models/users.js';
+import { createUser, authenticateUser, getAllUsers } from '../models/users.js';
 
 const showUserRegistrationForm = (req, res) => {
     res.render('register', { title: 'Register' });
@@ -79,11 +79,33 @@ const requireRole = (role) => {
         next();
     };
 };
+
+const requireLogin = (req, res, next) => {
+    if (!req.session || !req.session.user) {
+        req.flash('error', 'You must be logged in to access this page.');
+        return res.redirect('/login');
+    }
+    next();
+};
+
+const showUsersListPage = async (req, res) => {
+    try {
+        const users = await getAllUsers();
+        res.render('users', { title: 'Users List', users });
+    } catch (error) {
+        console.error('Error fetching users list:', error);
+        req.flash('error', 'Failed to load users list. Please try again.');
+        res.redirect('/');
+    }
+};
+
 export {
     showUserRegistrationForm,
     processUserRegistrationForm,
     showLoginForm,
     processLoginForm,
     processLogout,
-    requireRole
+    requireRole,
+    requireLogin,
+    showUsersListPage
 };

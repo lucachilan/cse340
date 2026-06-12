@@ -4,7 +4,7 @@
             <h1>
                 <%= title %>
             </h1>
-            <% if (user && user.role_name === 'admin') { %>
+            <% if (locals.user && locals.user.role_name === 'admin') { %>
                 <a href="/new-project" class="btn-primary">+ Add Service Project</a>
             <% } %>
         </div>

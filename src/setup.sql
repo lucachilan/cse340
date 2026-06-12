@@ -158,3 +158,15 @@ JOIN roles r ON u.role_id = r.role_id;
 
 -- Delete the test user
 DELETE FROM users WHERE email = 'test@example.com';
+
+-- 
+-- PROJECT VOLUNTEER TABLE
+-- Tracks which users have volunteered for which projects (many-to-many)
+-- 
+
+CREATE TABLE project_volunteer (
+    user_id    INT NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
+    project_id INT NOT NULL REFERENCES service_project(project_id) ON DELETE CASCADE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (user_id, project_id)
+);
