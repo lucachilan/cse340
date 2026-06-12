@@ -4,7 +4,9 @@
             <h1>
                 <%= title %>
             </h1>
-            <a href="/new-project" class="btn-primary">+ Add Service Project</a>
+            <% if (user && user.role_name === 'admin') { %>
+                <a href="/new-project" class="btn-primary">+ Add Service Project</a>
+            <% } %>
         </div>
         <h2>Upcoming Service Projects</h2>
         <ul>

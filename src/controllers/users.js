@@ -75,7 +75,7 @@ const requireRole = (role) => {
             req.flash('error', 'You do not have permission to access this page.');
             return res.redirect('/');
         }
-
+        res.locals.user = req.session.user;
         next();
     };
 };

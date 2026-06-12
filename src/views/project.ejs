@@ -40,9 +40,11 @@
                 <% } %>
             </div>
 
+            <% if (user && user.role_name === 'admin') { %>
             <div class="project-actions" style="margin-top: var(--space-lg); padding-top: var(--space-md); border-top: 1px solid var(--color-border);">
                 <a href="/assign-categories/<%= project.project_id %>" class="btn-secondary">Edit Categories</a>
             </div>
+            <% } %>
         </div>
     </main>
 <%- include('partials/footer') %>
