@@ -4,9 +4,78 @@
             <h1>
                 <%= title %>
             </h1>
+            <% if (user) { %>
+                <span class="role-badge role-<%= user.role_name %>" style="font-size: var(--font-size-sm); padding: var(--space-xs) var(--space-md);">
+                    <% if (user.role_name === 'admin') { %>⚙️<% } else { %>👤<% } %>
+                    <%= user.role_name %>
+                </span>
+            <% } %>
         </div>
 
-        <h2 class="section-heading" style="margin-top: 0;">My Volunteered Projects</h2>
+        <% if (user) { %>
+            <p style="color: var(--color-text-muted); margin-top: calc(-1 * var(--space-md)); margin-bottom: var(--space-xl);">
+                Welcome back, <strong style="color: var(--color-primary);"><%= user.name || user.email %></strong>!
+            </p>
+        <% } %>
+
+        <% if (isAdmin) { %>
+            <!-- ── Admin Panel: All Users ── -->
+            <h2 class="section-heading" style="margin-top: 0;">👥 All Registered Users</h2>
+
+            <% if (allUsers && allUsers.length > 0) { %>
+                <div class="users-table-wrapper" style="margin-bottom: var(--space-3xl);">
+                    <table class="users-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th>Manage</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% allUsers.forEach(u => { %>
+                                <tr>
+                                    <td>
+                                        <span class="user-name">
+                                            <%= u.name %>
+                                            <% if (u.user_id === user.user_id) { %>
+                                                <span class="you-badge">You</span>
+                                            <% } %>
+                                        </span>
+                                    </td>
+                                    <td class="user-email"><%= u.email %></td>
+                                    <td>
+                                        <span class="role-badge role-<%= u.role_name %>">
+                                            <% if (u.role_name === 'admin') { %>⚙️<% } else { %>👤<% } %>
+                                            <%= u.role_name %>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <form action="/users/<%= u.user_id %>/role" method="POST" class="role-change-form">
+                                            <select name="role" class="role-select" aria-label="Role for <%= u.name %>">
+                                                <option value="user" <%= u.role_name === 'user' ? 'selected' : '' %>>user</option>
+                                                <option value="admin" <%= u.role_name === 'admin' ? 'selected' : '' %>>admin</option>
+                                            </select>
+                                            <button type="submit" class="btn-update-role">Update</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                </div>
+            <% } else { %>
+                <div class="empty-state" style="margin-bottom: var(--space-3xl);">
+                    <div class="empty-state-icon">👤</div>
+                    <h4>No users registered yet</h4>
+                    <p>Invite people to <a href="/register">register</a>.</p>
+                </div>
+            <% } %>
+        <% } %>
+
+        <!-- ── My Volunteered Projects ── -->
+        <h2 class="section-heading" style="margin-top: 0;">🤝 My Volunteered Projects</h2>
 
         <% if (volunteeredProjects.length === 0) { %>
             <div class="empty-state">

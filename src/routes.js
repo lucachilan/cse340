@@ -36,7 +36,8 @@ import {
     processLogout,
     requireRole,
     requireLogin,
-    showUsersListPage
+    showUsersListPage,
+    processUpdateUserRole
 } from './controllers/users.js';
 import { volunteerForProject, unvolunteerForProject } from './controllers/volunteers.js';
 import { testErrorPage } from './controllers/errors.js';
@@ -106,6 +107,7 @@ router.get('/project/:project_id/unvolunteer', requireLogin, unvolunteerForProje
 
 // Users list - admin only
 router.get('/users', requireRole('admin'), showUsersListPage);
+router.post('/users/:id/role', requireRole('admin'), processUpdateUserRole);
 
 
 export default router;

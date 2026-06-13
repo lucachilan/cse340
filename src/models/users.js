@@ -26,7 +26,7 @@ const createUser = async (name, email, password_hash) => {
 
 const findUserByEmail = async (email) => {
     const query = `
-    SELECT u.user_id, u.email, u.password_hash, r.role_name 
+    SELECT u.user_id, u.name, u.email, u.password_hash, r.role_name 
     FROM users u
     JOIN roles r ON u.role_id = r.role_id
     WHERE u.email = $1
@@ -65,4 +65,18 @@ const getAllUsers = async () => {
     return result.rows;
 };
 
-export { createUser, authenticateUser, getAllUsers };
+const updateUserRole = async (userId, roleName) => {
+    const query = `
+        UPDATE users
+        SET role_id = (SELECT role_id FROM roles WHERE role_name = $1)
+        WHERE user_id = $2
+        RETURNING user_id
+    `;
+    const result = await db.query(query, [roleName, userId]);
+    if (result.rows.length === 0) {
+        throw new Error('User not found or role update failed');
+    }
+    return result.rows[0].user_id;
+};
+
+export { createUser, authenticateUser, getAllUsers, updateUserRole };

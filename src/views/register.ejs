@@ -1,27 +1,35 @@
 <%- include('partials/header') %>
     <main>
-        <h1>
-            <%= title %>
-        </h1>
+        <div class="page-header">
+            <h1><%= title %></h1>
+        </div>
 
-        <form action="/register" method="POST">
-            <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" id="name" name="name" required />
-            </div>
+        <div class="form-card" style="max-width: 480px; margin-top: var(--space-xl);">
+            <p style="margin-bottom: var(--space-lg); color: var(--color-text-muted);">
+                Create a new account to start volunteering for service projects.
+            </p>
 
-            <div class="form-group">
-                <label for="email">Email (Username)</label>
-                <input type="email" id="email" name="email" required />
-            </div>
+            <form action="/register" method="POST" class="org-form">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" placeholder="e.g. Jane Smith" required />
+                </div>
 
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" required />
-            </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="you@example.com" required />
+                </div>
 
-            <button type="submit">Register</button>
-        </form>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Choose a strong password" required minlength="6" />
+                </div>
 
+                <div class="form-actions">
+                    <a href="/login" class="btn-secondary">Already have an account?</a>
+                    <button type="submit" class="btn-primary">Create Account</button>
+                </div>
+            </form>
+        </div>
     </main>
     <%- include('partials/footer') %>

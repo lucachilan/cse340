@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt';
-import { createUser, authenticateUser, getAllUsers } from '../models/users.js';
+import { createUser, authenticateUser, getAllUsers, updateUserRole } from '../models/users.js';
 
 const showUserRegistrationForm = (req, res) => {
     res.render('register', { title: 'Register' });
@@ -99,6 +99,26 @@ const showUsersListPage = async (req, res) => {
     }
 };
 
+const processUpdateUserRole = async (req, res) => {
+    const userId = req.params.id;
+    const { role } = req.body;
+    const validRoles = ['user', 'admin'];
+
+    if (!userId || !validRoles.includes(role)) {
+        req.flash('error', 'Invalid user ID or role.');
+        return res.redirect('/users');
+    }
+
+    try {
+        await updateUserRole(userId, role);
+        req.flash('success', `User role updated to "${role}" successfully.`);
+    } catch (error) {
+        console.error('Error updating user role:', error);
+        req.flash('error', 'Failed to update user role. Please try again.');
+    }
+    res.redirect('/users');
+};
+
 export {
     showUserRegistrationForm,
     processUserRegistrationForm,
@@ -107,5 +127,6 @@ export {
     processLogout,
     requireRole,
     requireLogin,
-    showUsersListPage
+    showUsersListPage,
+    processUpdateUserRole
 };

@@ -1,35 +1,65 @@
 <%- include('partials/header') %>
     <main>
         <div class="page-header">
-            <h1>
-                <%= title %>
-            </h1>
+            <h1><%= title %></h1>
         </div>
 
         <% if (users && users.length > 0) { %>
-            <table class="users-table">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Role</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% users.forEach(user => { %>
+            <p style="color: var(--color-text-muted); margin-bottom: var(--space-lg);">
+                Managing <strong style="color: var(--color-primary);"><%= users.length %></strong> registered user<%= users.length !== 1 ? 's' : '' %>.
+                Use the dropdowns below to change a user's role.
+            </p>
+
+            <div class="users-table-wrapper">
+                <table class="users-table">
+                    <thead>
                         <tr>
-                            <td><%= user.name %></td>
-                            <td><%= user.email %></td>
-                            <td><span class="role-badge role-<%= user.role_name %>"><%= user.role_name %></span></td>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th>Change Role</th>
                         </tr>
-                    <% }) %>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        <% users.forEach(user => { %>
+                            <tr>
+                                <td>
+                                    <span class="user-name">
+                                        <%= user.name %>
+                                        <% if (user.user_id === locals.user?.user_id) { %>
+                                            <span class="you-badge">You</span>
+                                        <% } %>
+                                    </span>
+                                </td>
+                                <td class="user-email"><%= user.email %></td>
+                                <td>
+                                    <span class="role-badge role-<%= user.role_name %>">
+                                        <% if (user.role_name === 'admin') { %>⚙️<% } else { %>👤<% } %>
+                                        <%= user.role_name %>
+                                    </span>
+                                </td>
+                                <td>
+                                    <form action="/users/<%= user.user_id %>/role" method="POST" class="role-change-form">
+                                        <select name="role" class="role-select" aria-label="Select role for <%= user.name %>">
+                                            <option value="user" <%= user.role_name === 'user' ? 'selected' : '' %>>user</option>
+                                            <option value="admin" <%= user.role_name === 'admin' ? 'selected' : '' %>>admin</option>
+                                        </select>
+                                        <button type="submit" class="btn-update-role">Update</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
         <% } else { %>
             <div class="empty-state">
                 <div class="empty-state-icon">👤</div>
                 <h4>No users found</h4>
                 <p>There are no registered users yet.</p>
+                <div style="margin-top: var(--space-lg);">
+                    <a href="/register" class="btn-primary">Register First User</a>
+                </div>
             </div>
         <% } %>
     </main>

@@ -956,3 +956,152 @@ main {
 .btn-primary:hover {
     background: #0052cc;
 }
+/* =====================
+   Users Management Table
+   ===================== */
+
+.users-table-wrapper {
+    overflow-x: auto;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+    box-shadow: 0 2px 12px var(--color-shadow);
+}
+
+.users-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--color-surface);
+    font-size: var(--font-size-base);
+}
+
+.users-table thead {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+    color: var(--color-text-inverse);
+}
+
+.users-table thead th {
+    padding: var(--space-md) var(--space-lg);
+    text-align: left;
+    font-size: var(--font-size-sm);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+}
+
+.users-table tbody tr {
+    border-bottom: 1px solid var(--color-border);
+    transition: background-color var(--transition-fast);
+}
+
+.users-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.users-table tbody tr:hover {
+    background-color: var(--color-surface-alt);
+}
+
+.users-table tbody td {
+    padding: var(--space-md) var(--space-lg);
+    vertical-align: middle;
+}
+
+.user-name {
+    font-weight: 600;
+    color: var(--color-text);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.user-email {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+}
+
+.you-badge {
+    display: inline-block;
+    background-color: var(--color-accent);
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 1px 7px;
+    border-radius: var(--radius-full);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.role-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px var(--space-sm);
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-sm);
+    font-weight: 700;
+    text-transform: capitalize;
+    border: 1.5px solid transparent;
+}
+
+.role-badge.role-admin {
+    background-color: #fff3e0;
+    color: #b45309;
+    border-color: #fcd34d;
+}
+
+.role-badge.role-user {
+    background-color: #e0f2fe;
+    color: #0369a1;
+    border-color: #7dd3fc;
+}
+
+.role-change-form {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.role-select {
+    padding: 4px var(--space-sm);
+    font-family: var(--font-family);
+    font-size: var(--font-size-sm);
+    color: var(--color-text);
+    background-color: var(--color-bg);
+    border: 1.5px solid var(--color-border);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: border-color var(--transition-fast);
+    outline: none;
+}
+
+.role-select:focus {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 2px rgba(13, 115, 119, 0.15);
+}
+
+.btn-update-role {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px var(--space-md);
+    font-family: var(--font-family);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    color: var(--color-text-inverse);
+    background: linear-gradient(135deg, var(--color-accent), var(--color-primary));
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: opacity var(--transition-fast), transform var(--transition-fast);
+    box-shadow: 0 1px 4px rgba(13, 115, 119, 0.25);
+    white-space: nowrap;
+}
+
+.btn-update-role:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+.btn-update-role:active {
+    transform: translateY(0);
+}
