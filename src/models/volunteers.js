@@ -37,7 +37,7 @@ const removeVolunteer = async (userId, projectId) => {
  */
 const getVolunteerProjectsForUser = async (userId) => {
   const query = `
-    SELECT sp.project_id, sp.title, sp.description, sp.date, sp.location,
+    SELECT sp.project_id, sp.title, sp.description, sp.date, sp.location, sp.organization_id,
            o.name AS organization_name, o.logo_filename
     FROM project_volunteer pv
     JOIN service_project sp ON pv.project_id = sp.project_id

@@ -107,6 +107,7 @@
                             <% if (project.logo_filename) { %>
                                 <img src="/images/<%= project.logo_filename %>" alt="<%= project.organization_name %> logo" style="height: 32px; width: 32px; object-fit: contain;">
                             <% } %>
+                            <a href="/project/<%= project.project_id %>/unvolunteer" class="btn-danger" style="text-decoration: none; font-size: var(--font-size-sm); padding: var(--space-xs) var(--space-md);">Remove</a>
                         </span>
                     </li>
                 <% }) %>
